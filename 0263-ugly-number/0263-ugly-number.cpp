@@ -1,23 +1,30 @@
 class Solution {
 public:
-    bool isUgly(int n) {
-        if(n==0){
-            return false;
+    int digit_square_sum(int num)
+    {
+        int sum=0;
+        while(num!=0)
+        {
+            sum+=(num%10)*(num%10);
+            num/=10;
         }
-      while(n != 1){
-          if(n%2==0){
-              n/=2;
-          }
-          else if(n%3==0){
-              n/=3;
-          }
-          else if(n%5==0){
-              n/=5;
-          }
-          else{
-              return false;
-          }
-      }
-      return true;
+        return sum;
+    }
+
+    bool isHappy(int n) {
+        vector<int> results;
+        while(n!=1)
+        {
+            for(int i=0; i<results.size(); i++)
+            {
+                if(results[i]==n)
+                {
+                    return false;;
+                }
+            }
+            results.push_back(n);
+            n = digit_square_sum(n);
+        }
+        return true;
     }
 };
